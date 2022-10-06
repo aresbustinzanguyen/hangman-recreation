@@ -1,0 +1,87 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath> 
+
+using namespace std;
+const float pi = 3.14159;
+
+void userInput(char& c, double& p1, double& p2);
+
+void userOutput(char c, double x, double y, double M, double A);
+
+void RecToPol(double x, double y, double& M, double& A);
+
+void PolToRec(double M, double A, double& x, double& y);
+
+//**************************************************************
+int main()
+{
+    char c = ' ';
+    double p1, p2;
+    double x, y, M, A;
+    cout << "To start the program, enter letter (p) or (r) for polar-->rectangular or rectangular-->polar conversion. Enter two numbers after for the conversion to start. [Enter (q) to exit.]" << endl;
+
+    while (c != 'q' && c != 'Q') {
+        userInput(c, p1, p2);
+
+        cout << fixed << setprecision(2);
+
+        switch (c) {
+        case 'R':
+        case 'r':
+            x = p1;
+            y = p2;
+            RecToPol(x, y, M, A);
+            userOutput(c, x, y, M, A);
+            break;
+
+        case 'P':
+        case 'p':
+            M = p1;
+            A = p2;
+            PolToRec(M, A, x, y);
+            userOutput(c, x, y, M, A);
+            break;
+
+        case 'Q':
+        case 'q':
+            break;
+
+        default:
+            cout << "Format Error! " << setfill('-') << setw(46) << '-' << endl;
+        }
+    }
+    return(0);
+}
+//**************************************************************
+
+void userInput(char& c, double& p1, double& p2) {
+    cin >> c;
+    if (c == 'Q' || c == 'q') {
+        return;
+    }
+    else {
+        cin >> p1 >> p2;
+    }
+}
+
+void userOutput(char c, double x, double y, double M, double A) {
+    if (c == 'r' || c == 'R') {
+        cout << "REC -> POL " << fixed << setfill('+') << setw(49) << '+' << endl;
+        cout << "REC: X = " << setw(4) << x << " Y = " << y << setw(4) << " POL: M = " << setw(4) << M << " A = " << setw(4) << A << endl;
+    }
+    else if (c == 'p' || c == 'P') {
+        cout << "POL -> REC " << fixed << setfill('+') << setw(49) << '+' << endl;
+        cout << "POL: M = " << setw(4) << M << " A = " << A << setw(4) << " REC: X = " << x << setw(4) << " Y = " << y << setw(4) << endl;
+    }
+}
+
+void RecToPol(double x, double y, double& M, double& A) {
+    M = sqrt(pow(x, 2.0) + pow(y, 2.0));
+    A = atan2(y, x) * (180.0 / pi);
+}
+
+void PolToRec(double M, double A, double& x, double& y) {
+    x = M * cos(A * (pi / 180.0));
+    y = M * sin(A * (pi / 180.0));
+}
