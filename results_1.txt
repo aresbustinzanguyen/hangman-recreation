@@ -1,0 +1,19 @@
+//example of output file
+
+The chosen word is tangle.
+
+The character a was found!
+The character e was found!
+The character t was found!
+The character f was not found!
+The character c was not found!
+The character b was not found!
+The character W was not found!
+The character o was not found!
+The character 4 was not found!
+The character s was not found!
+The character l was found!
+The character d was not found!
+
+
+The user has failed to find the word.
